@@ -25,8 +25,11 @@ export default function Home() {
             <Navbar />
         <form onSubmit={handleSubmit} className="space-y-4">
             <input placeholder="Jmeno" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
-            <input placeholder="Email" value={street} onChange={(e) => setStreet(e.target.value)} className="border p-2" />
-            <input placeholder="Telefon" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
+            <input placeholder="Ulice" value={street} onChange={(e) => setStreet(e.target.value)} className="border p-2" />
+            <input placeholder="Mesto" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
+            <input placeholder="Web" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
+            <input placeholder="Facebook" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
+            <input placeholder="Instagram" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
             <input placeholder="Typ" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
             <button type="submit" className="bg-blue-500 text-white p-2">Pridat Instituci</button>
         </form>
