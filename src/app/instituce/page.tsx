@@ -36,6 +36,9 @@ export default function Home() {
                 <th className="border p-2">Jmeno</th>
                 <th className="border p-2">Ulice</th>
                 <th className="border p-2">Mesto</th>
+                <th className="border p-2">Web</th>
+                <th className="border p-2">Facebook</th>
+                <th className="border p-2">Instagram</th>
                 <th className="border p-2">Typ</th>
             </tr>
             </thead>
@@ -44,12 +47,18 @@ export default function Home() {
                     <td className="border p-2">Best divadlo evr</td>
                     <td className="border p-2">Vymyslena 189</td>
                     <td className="border p-2">Sudkov</td>
+                    <th className="border p-2">www.bde.cz</th>
+                    <th className="border p-2"></th>
+                    <th className="border p-2"></th>
                     <td className="border p-2">Divadlo</td>
                 </tr>
                 <tr>
                     <td className="border p-2">ZS Nerealna</td>
                     <td className="border p-2">Nekde 18</td>
                     <td className="border p-2">Praha 9</td>
+                    <th className="border p-2">www.zsnr.cz</th>
+                    <th className="border p-2"></th>
+                    <th className="border p-2"></th>
                     <td className="border p-2">Skola</td>
                 </tr>
             </tbody>

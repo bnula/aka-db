@@ -54,16 +54,20 @@ export default function Home() {
       <table className="w-full mt-6 border">
         <thead>
           <tr>
+            <th className="border p-2">Titul</th>
             <th className="border p-2">Jmeno</th>
             <th className="border p-2">Email</th>
-            <th className="border p-2">Telefon</th>
+            <th className="border p-2">Pevna linka</th>
+            <th className="border p-2">Mobil</th>
             <th className="border p-2">Pozice</th>
             <th className="border p-2">Instituce</th>
           </tr>
         </thead>
         <tbody>
+          <td className="border p-2">Judr.</td>
           <td className="border p-2">Franta Uzivatel</td>
           <td className="border p-2">franta@uzivatel.cz</td>
+          <td className="border p-2">123456789</td>
           <td className="border p-2">123456789</td>
           <td className="border p-2">Nejaka</td>
           <td className="border p-2">Best divadlo evr</td>
