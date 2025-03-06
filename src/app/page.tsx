@@ -1,6 +1,5 @@
 'use client'
 import { Contact } from "@/lib/types/contact";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Navbar from "./ui/navbar";
 
@@ -20,6 +19,9 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(institution);
+    console.log(position);
+    console.log(phone);
     const res = await fetch('/api/contacts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -35,14 +37,14 @@ export default function Home() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input placeholder="Jmeno" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
         <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
-        <input placeholder="Telefon" value={phone} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
+        <input placeholder="Telefon" value={phone} onChange={(e) => setPhone(e.target.value)} className="border p-2" />
         <select value={position} onChange={(e) => setPosition(e.target.value)} className="border p-2">
             <option value="" className="text-black">Pozice</option>
             <option value="Manager" className="text-black">Nejaka</option>
             <option value="Developer" className="text-black">Nejaka jina</option>
             <option value="Designer" className="text-black">Treti</option>
           </select>
-        <select value={institution} onChange={(e) => setPosition(e.target.value)} className="border p-2">
+        <select value={institution} onChange={(e) => setInstitution(e.target.value)} className="border p-2">
             <option value="" className="text-black">Instituce</option>
             <option value="Manager" className="text-black">Best divadlo evr</option>
             <option value="Developer" className="text-black">Jine divadlo</option>

@@ -1,7 +1,5 @@
 'use client'
-import { Contact } from "@/lib/types/contact";
 import { Institution } from "@/lib/types/institution";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
 
@@ -18,6 +16,7 @@ export default function Home() {
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
+        console.log(institutions);
         e.preventDefault();
     };
 
