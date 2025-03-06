@@ -27,6 +27,7 @@ export default function Home() {
             <input placeholder="Jmeno" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
             <input placeholder="Email" value={street} onChange={(e) => setStreet(e.target.value)} className="border p-2" />
             <input placeholder="Telefon" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
+            <input placeholder="Typ" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
             <button type="submit" className="bg-blue-500 text-white p-2">Pridat Instituci</button>
         </form>
         <table className="w-full mt-6 border">
@@ -35,6 +36,7 @@ export default function Home() {
                 <th className="border p-2">Jmeno</th>
                 <th className="border p-2">Ulice</th>
                 <th className="border p-2">Mesto</th>
+                <th className="border p-2">Typ</th>
             </tr>
             </thead>
             <tbody>
@@ -42,11 +44,13 @@ export default function Home() {
                     <td className="border p-2">Best divadlo evr</td>
                     <td className="border p-2">Vymyslena 189</td>
                     <td className="border p-2">Sudkov</td>
+                    <td className="border p-2">Divadlo</td>
                 </tr>
                 <tr>
-                    <td className="border p-2">Jine divadlo</td>
+                    <td className="border p-2">ZS Nerealna</td>
                     <td className="border p-2">Nekde 18</td>
                     <td className="border p-2">Praha 9</td>
+                    <td className="border p-2">Skola</td>
                 </tr>
             </tbody>
         </table>
