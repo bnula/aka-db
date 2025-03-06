@@ -39,9 +39,16 @@ export default function Home() {
             </tr>
             </thead>
             <tbody>
-            <td className="border p-2">Best divadlo evr</td>
-            <td className="border p-2">Vymyslena 189</td>
-            <td className="border p-2">Sudkov</td>
+                <tr>
+                    <td className="border p-2">Best divadlo evr</td>
+                    <td className="border p-2">Vymyslena 189</td>
+                    <td className="border p-2">Sudkov</td>
+                </tr>
+                <tr>
+                    <td className="border p-2">Jine divadlo</td>
+                    <td className="border p-2">Nekde 18</td>
+                    <td className="border p-2">Praha 9</td>
+                </tr>
             </tbody>
         </table>
         </div>

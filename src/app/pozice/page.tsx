@@ -32,7 +32,15 @@ export default function Home() {
             </tr>
             </thead>
             <tbody>
-            <td className="border p-2">Nejaka</td>
+                <tr>
+                    <td className="border p-2">Nejaka</td>
+                </tr>
+                <tr>
+                    <td className="border p-2">Nejaka jina</td>
+                </tr>
+                <tr>
+                    <td className="border p-2">Treti</td>
+                </tr>
             </tbody>
         </table>
         </div>

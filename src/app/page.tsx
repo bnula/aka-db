@@ -36,8 +36,17 @@ export default function Home() {
         <input placeholder="Jmeno" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
         <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
         <input placeholder="Telefon" value={phone} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
-        <input placeholder="Pozice" value={position} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
-        <input placeholder="Instituce" value={institution} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
+        <select value={position} onChange={(e) => setPosition(e.target.value)} className="border p-2">
+            <option value="" className="text-black">Pozice</option>
+            <option value="Manager" className="text-black">Nejaka</option>
+            <option value="Developer" className="text-black">Nejaka jina</option>
+            <option value="Designer" className="text-black">Treti</option>
+          </select>
+        <select value={institution} onChange={(e) => setPosition(e.target.value)} className="border p-2">
+            <option value="" className="text-black">Instituce</option>
+            <option value="Manager" className="text-black">Best divadlo evr</option>
+            <option value="Developer" className="text-black">Jine divadlo</option>
+          </select>
         <button type="submit" className="bg-blue-500 text-white p-2">Pridat Kontakt</button>
       </form>
       <table className="w-full mt-6 border">
