@@ -1,28 +1,15 @@
-'use client'
-import { Institution } from "@/lib/types/institution";
-import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
 
-export default function Home() {
-    const [positions, setPositions] = useState<Institution[]>([]);
-    const [name, setName] = useState<string>('');
+import { createPosition, fetchPositions } from "@/lib/actions";
 
-    useEffect(() => {
-        fetch('/api/contacts')
-        .then((res) => res.json())
-        .then((data) => setPositions(data));
-    }, []);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        console.log(positions);
-        e.preventDefault();
-    };
+export default async function Home() {
+    const positions = await fetchPositions()
 
     return (
         <div className="p-6">
         <Navbar />
-        <form onSubmit={handleSubmit} className="space-y-4">
-            <input placeholder="Nazev" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
+        <form action={createPosition} className="space-y-4">
+            <input placeholder="Nazev" name="name" id="name" className="border p-2" />
             <button type="submit" className="bg-blue-500 text-white p-2">Pridat pozici</button>
         </form>
         <table className="w-full mt-6 border">
@@ -32,15 +19,15 @@ export default function Home() {
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td className="border p-2">Nejaka</td>
-                </tr>
-                <tr>
-                    <td className="border p-2">Nejaka jina</td>
-                </tr>
-                <tr>
-                    <td className="border p-2">Treti</td>
-                </tr>
+                {
+                    positions.map((p) => {
+                        return (
+                            <tr key={p.id}>
+                                <td className="border p-2">{p.name}</td>
+                            </tr>
+                        )
+                    })
+                }
             </tbody>
         </table>
         </div>

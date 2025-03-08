@@ -3,4 +3,7 @@ export type Institution = {
     name: string;
     street: string;
     city: string;
+    website?: string | null;
+    facebook?: string| null;
+    instagram?: string | null;
 }
