@@ -1,5 +1,5 @@
-import { Institution } from "./institution";
-import { Position } from "./position";
+// import { Institution } from "./institution";
+// import { Position } from "./position";
 
 export type Contact = {
     id: number;
