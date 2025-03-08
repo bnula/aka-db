@@ -1,36 +1,19 @@
-'use client'
-import { Institution } from "@/lib/types/institution";
-import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
+import { createInstitution, fetchInstitutions } from "@/lib/actions";
 
-export default function Home() {
-    const [institutions, setInstitutions] = useState<Institution[]>([]);
-    const [name, setName] = useState<string>('');
-    const [street, setStreet] = useState<string>('');
-    const [city, setCity] = useState<string>('');
-
-    useEffect(() => {
-        fetch('/api/contacts')
-        .then((res) => res.json())
-        .then((data) => setInstitutions(data));
-    }, []);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        console.log(institutions);
-        e.preventDefault();
-    };
+export default async function Home() {
+    const institutions = await fetchInstitutions();
 
     return (
         <div className="p-6">
             <Navbar />
-        <form onSubmit={handleSubmit} className="space-y-4">
-            <input placeholder="Jmeno" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
-            <input placeholder="Ulice" value={street} onChange={(e) => setStreet(e.target.value)} className="border p-2" />
-            <input placeholder="Mesto" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
-            <input placeholder="Web" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
-            <input placeholder="Facebook" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
-            <input placeholder="Instagram" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
-            <input placeholder="Typ" value={city} onChange={(e) => setCity(e.target.value)} className="border p-2" />
+        <form action={createInstitution} className="space-y-4">
+            <input placeholder="Jmeno" name="name" id="name" className="border p-2" />
+            <input placeholder="Ulice" name="street" id="street" className="border p-2" />
+            <input placeholder="Mesto" name="city" id="city" className="border p-2" />
+            <input placeholder="Web" name="website" id="website" className="border p-2" />
+            <input placeholder="Facebook" name="facebook" id="facebook" className="border p-2" />
+            <input placeholder="Instagram" name="instagram" id="instagram" className="border p-2" />
             <button type="submit" className="bg-blue-500 text-white p-2">Pridat Instituci</button>
         </form>
         <table className="w-full mt-6 border">
@@ -42,10 +25,23 @@ export default function Home() {
                 <th className="border p-2">Web</th>
                 <th className="border p-2">Facebook</th>
                 <th className="border p-2">Instagram</th>
-                <th className="border p-2">Typ</th>
             </tr>
             </thead>
             <tbody>
+                {
+                    institutions.map((i) => {
+                        return (
+                            <tr>
+                                <td className="border p-2">{i.name}</td>
+                                <td className="border p-2">{i.street}</td>
+                                <td className="border p-2">{i.city}</td>
+                                <td className="border p-2">{i.website}</td>
+                                <td className="border p-2">{i.facebook}</td>
+                                <td className="border p-2">{i.instagram}</td>
+                            </tr>
+                        )
+                    })
+                }
                 <tr>
                     <td className="border p-2">Best divadlo evr</td>
                     <td className="border p-2">Vymyslena 189</td>
@@ -53,7 +49,6 @@ export default function Home() {
                     <th className="border p-2">www.bde.cz</th>
                     <th className="border p-2"></th>
                     <th className="border p-2"></th>
-                    <td className="border p-2">Divadlo</td>
                 </tr>
                 <tr>
                     <td className="border p-2">ZS Nerealna</td>
@@ -62,7 +57,6 @@ export default function Home() {
                     <th className="border p-2">www.zsnr.cz</th>
                     <th className="border p-2"></th>
                     <th className="border p-2"></th>
-                    <td className="border p-2">Skola</td>
                 </tr>
             </tbody>
         </table>

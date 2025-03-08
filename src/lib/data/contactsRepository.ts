@@ -1,9 +1,7 @@
 import { Institution } from "../types/institution";
 import { Contact } from "../types/contact";
 import { Position } from "../types/position";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../prisma";
 
 export const contactsRepository = {
     async getAllContacts() {
@@ -35,8 +33,8 @@ export const contactsRepository = {
         return await prisma.institutions.findUnique({ where: { id } });
     },
 
-    async createInstitution(data: { institution: Institution} ) {
-        return await prisma.institutions.create({ data: data.institution });
+    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string }) {
+        return await prisma.institutions.create({ data: data });
     },
 
     async updateInstitution(data: { institution: Institution }) {
