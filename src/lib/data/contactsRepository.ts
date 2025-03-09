@@ -12,8 +12,8 @@ export const contactsRepository = {
         return await prisma.contacts.findUnique({ where: { id } });
     },
 
-    async createContact(data: { contact: Contact }) {
-        return await prisma.contacts.create({ data: data.contact });
+    async createContact(data: { title: string, name: string, email: string, phone: string, cellphone: string, position_id: number, institution_id: number }) {
+        return await prisma.contacts.create({ data: data });
     },
 
     async updateContact(data: { contact: Contact }) {
@@ -67,5 +67,28 @@ export const contactsRepository = {
 
     async deletePosition(id: number) {
         return await prisma.positions.delete({ where: { id } })
+    },
+
+    async getAllInstitutionTypes() {
+        return await prisma.institution_types.findMany();
+    },
+
+    async getInstitutionTypeById(id: number){
+        return await prisma.institution_types.findUnique({ where: { id } });
+    },
+
+    async createInstitutionType(data: { name: string} ) {
+        return await prisma.institution_types.create({ data: {
+            name: data.name
+        } });
+    },
+
+    async updateInsitutionType(data: { position: Position }) {
+        const id = data.position.id;
+        return await prisma.institution_types.update({ where: { id }, data });
+        },
+
+    async deleteInstitutionType(id: number) {
+        return await prisma.institution_types.delete({ where: { id } })
     },
 }

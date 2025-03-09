@@ -14,6 +14,18 @@ export async function fetchPositions() {
     return await contactsRepository.getAllPositions();
 }
 
+export async function createInstitutionType(formData: FormData){
+    const name = String(formData.get("name"))
+    
+    if (name != null) {
+        contactsRepository.createInstitutionType({name: name})
+    }
+}
+
+export async function fetchInstitutionTypes() {
+    return await contactsRepository.getAllInstitutionTypes();
+}
+
 export async function createInstitution(formData: FormData) {
     const data = {
         name: String(formData.get("name")),
@@ -22,7 +34,8 @@ export async function createInstitution(formData: FormData) {
         website: String(formData.get("website")),
         facebook: String(formData.get("facebook")),
         instagram: String(formData.get("instagram")),
-    }
+        type_id: Number(formData.get("type"))
+    };
 
     contactsRepository.createInstitution(data);
 }
@@ -33,6 +46,18 @@ export async function fetchInstitutions() {
 
 export async function createContact(formData: FormData) {
     const data = {
-        title: formData.get("title"),
+        title: String(formData.get("title")),
+        name: String(formData.get("name")),
+        email: String(formData.get("email")),
+        phone: String(formData.get("phone")),
+        cellphone: String(formData.get("cellPhone")),
+        position_id: Number(formData.get("position_id")),
+        institution_id: Number(formData.get("institution_id"))
     }
+
+    return await contactsRepository.createContact(data);
+}
+
+export async function fetchContacts() {
+    return await contactsRepository.getAllContacts();
 }

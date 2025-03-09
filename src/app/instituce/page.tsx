@@ -1,8 +1,14 @@
+import { InstitutionType } from "@/lib/types/institution_type";
 import Navbar from "../ui/navbar";
-import { createInstitution, fetchInstitutions } from "@/lib/actions";
+import { createInstitution, fetchInstitutions, fetchInstitutionTypes } from "@/lib/actions";
 
 export default async function Home() {
     const institutions = await fetchInstitutions();
+    const types = await fetchInstitutionTypes();
+
+    const getTypeName = (id: number) => {
+        return types.filter((t: InstitutionType) => t.id === id)[0].name;
+    }
 
     return (
         <div className="p-6">
@@ -14,6 +20,13 @@ export default async function Home() {
             <input placeholder="Web" name="website" id="website" className="border p-2" />
             <input placeholder="Facebook" name="facebook" id="facebook" className="border p-2" />
             <input placeholder="Instagram" name="instagram" id="instagram" className="border p-2" />
+            <select className="border p-2"  name="type" id="type">
+                {types.map((t: InstitutionType) => {
+                    return (
+                    <option key={t.id} value={t.id} className="text-black">{t.name}</option>
+                    )
+                })}
+                </select>
             <button type="submit" className="bg-blue-500 text-white p-2">Pridat Instituci</button>
         </form>
         <table className="w-full mt-6 border">
@@ -25,6 +38,7 @@ export default async function Home() {
                 <th className="border p-2">Web</th>
                 <th className="border p-2">Facebook</th>
                 <th className="border p-2">Instagram</th>
+                <th className="border p-2">Typ</th>
             </tr>
             </thead>
             <tbody>
@@ -38,26 +52,13 @@ export default async function Home() {
                                 <td className="border p-2">{i.website}</td>
                                 <td className="border p-2">{i.facebook}</td>
                                 <td className="border p-2">{i.instagram}</td>
+                                <td className="border p-2">{
+                                    getTypeName(i.type_id)
+                                    }</td>
                             </tr>
                         )
                     })
                 }
-                <tr>
-                    <td className="border p-2">Best divadlo evr</td>
-                    <td className="border p-2">Vymyslena 189</td>
-                    <td className="border p-2">Sudkov</td>
-                    <th className="border p-2">www.bde.cz</th>
-                    <th className="border p-2"></th>
-                    <th className="border p-2"></th>
-                </tr>
-                <tr>
-                    <td className="border p-2">ZS Nerealna</td>
-                    <td className="border p-2">Nekde 18</td>
-                    <td className="border p-2">Praha 9</td>
-                    <th className="border p-2">www.zsnr.cz</th>
-                    <th className="border p-2"></th>
-                    <th className="border p-2"></th>
-                </tr>
             </tbody>
         </table>
         </div>
