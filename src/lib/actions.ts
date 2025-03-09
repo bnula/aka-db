@@ -6,7 +6,7 @@ export async function createPosition(formData: FormData){
     const name = String(formData.get("name"))
     
     if (name != null) {
-        contactsRepository.createPosition({name: name})
+        await contactsRepository.createPosition({name: name})
     }
 }
 
@@ -18,7 +18,7 @@ export async function createInstitutionType(formData: FormData){
     const name = String(formData.get("name"))
     
     if (name != null) {
-        contactsRepository.createInstitutionType({name: name})
+        await contactsRepository.createInstitutionType({name: name})
     }
 }
 
@@ -37,7 +37,7 @@ export async function createInstitution(formData: FormData) {
         type_id: Number(formData.get("type"))
     };
 
-    contactsRepository.createInstitution(data);
+    await contactsRepository.createInstitution(data);
 }
 
 export async function fetchInstitutions() {
