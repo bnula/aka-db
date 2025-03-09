@@ -33,7 +33,7 @@ export const contactsRepository = {
         return await prisma.institutions.findUnique({ where: { id } });
     },
 
-    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string }) {
+    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string, type_id: number }) {
         return await prisma.institutions.create({ data: data });
     },
 
