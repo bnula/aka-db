@@ -1,6 +1,6 @@
-import { Institution } from "../types/institution";
-import { Contact } from "../types/contact";
-import { Position } from "../types/position";
+// import { Institution } from "../types/institution";
+// import { Contact } from "../types/contact";
+// import { Position } from "../types/position";
 import { prisma } from "../prisma";
 
 export const contactsRepository = {
