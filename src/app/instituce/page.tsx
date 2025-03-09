@@ -6,6 +6,8 @@ export default async function Home() {
     const institutions = await fetchInstitutions();
     const types = await fetchInstitutionTypes();
 
+    console.log(institutions);
+
     const getTypeName = (id: number) => {
         return types.filter((t: InstitutionType) => t.id === id)[0].name;
     }
