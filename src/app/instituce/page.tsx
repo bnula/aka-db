@@ -31,7 +31,7 @@ export default async function Home() {
                 {
                     institutions.map((i) => {
                         return (
-                            <tr>
+                            <tr key={i.id}>
                                 <td className="border p-2">{i.name}</td>
                                 <td className="border p-2">{i.street}</td>
                                 <td className="border p-2">{i.city}</td>

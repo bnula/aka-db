@@ -30,3 +30,9 @@ export async function createInstitution(formData: FormData) {
 export async function fetchInstitutions() {
     return await contactsRepository.getAllInstitutions();
 }
+
+export async function createContact(formData: FormData) {
+    const data = {
+        title: formData.get("title"),
+    }
+}

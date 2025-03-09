@@ -45,7 +45,7 @@ export default function Home() {
     <div className="p-6">
         <Navbar />
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input placeholder="Titul" value={title} onChange={(e) => setTitle(e.target.value)} className="border p-2" />
+        <input placeholder="Titul" name="title" id="title" className="border p-2" />
         <input placeholder="Jmeno" value={name} onChange={(e) => setName(e.target.value)} className="border p-2" />
         <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border p-2" />
         <input placeholder="Telefon" value={phone} onChange={(e) => setPhone(e.target.value)} className="border p-2" />

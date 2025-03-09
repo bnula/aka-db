@@ -28,11 +28,19 @@ model institutions {
   website   String?    @db.VarChar
   facebook  String?    @db.VarChar
   instagram String?    @db.VarChar
+  type_id   Int
   contacts  contacts[]
+  institution_types   institution_types @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_institutions_fk")
 }
 
 model positions {
   id       Int        @id(map: "positions_pk") @default(autoincrement())
   name     String     @db.VarChar
   contacts contacts[]
+}
+
+model institution_types {
+  id      Int         @id(map: "institution_types_pk") @default(autoincrement())
+  name    String      @db.VarChar
+  institutions institutions[]
 }
