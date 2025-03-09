@@ -16,10 +16,10 @@ export const contactsRepository = {
         return await prisma.contacts.create({ data: data });
     },
 
-    async updateContact(data: { contact: Contact }) {
-        const id = data.contact.id;
-        return await prisma.contacts.update({ where: { id }, data: data.contact });
-    },
+    // async updateContact(data: { contact: Contact }) {
+    //     const id = data.contact.id;
+    //     return await prisma.contacts.update({ where: { id }, data: data.contact });
+    // },
 
     async deleteContact(id: number) {
         return await prisma.contacts.delete({ where: { id } });
@@ -37,10 +37,10 @@ export const contactsRepository = {
         return await prisma.institutions.create({ data: data });
     },
 
-    async updateInstitution(data: { institution: Institution }) {
-        const id = data.institution.id;
-        return await prisma.institutions.update({ where: { id }, data });
-        },
+    // async updateInstitution(data: { institution: Institution }) {
+    //     const { id, ...updateData } = institution;
+    //     return await prisma.institutions.update({ where: { id }, updateData });
+    //     },
 
     async deleteInstitution(id: number) {
         return await prisma.institutions.delete({ where: { id } })
@@ -60,10 +60,10 @@ export const contactsRepository = {
         } });
     },
 
-    async updatePosition(data: { position: Position }) {
-        const id = data.position.id;
-        return await prisma.positions.update({ where: { id }, data });
-        },
+    // async updatePosition(data: { position: Position }) {
+    //     const id = data.position.id;
+    //     return await prisma.positions.update({ where: { id }, data });
+    //     },
 
     async deletePosition(id: number) {
         return await prisma.positions.delete({ where: { id } })
@@ -83,10 +83,10 @@ export const contactsRepository = {
         } });
     },
 
-    async updateInsitutionType(data: { position: Position }) {
-        const id = data.position.id;
-        return await prisma.institution_types.update({ where: { id }, data });
-        },
+    // async updateInsitutionType(data: { position: Position }) {
+    //     const id = data.position.id;
+    //     return await prisma.institution_types.update({ where: { id }, data });
+    //     },
 
     async deleteInstitutionType(id: number) {
         return await prisma.institution_types.delete({ where: { id } })
