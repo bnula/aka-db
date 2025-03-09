@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <div className="p-6">
-        <Navbar />
+      <Navbar />
       <form action={createContact} className="space-y-4">
         <input placeholder="Titul" name="title" id="title" className="border p-2" />
         <input placeholder="Jmeno" name="name" id="name" className="border p-2" />

@@ -55,7 +55,7 @@ export async function createContact(formData: FormData) {
         institution_id: Number(formData.get("institution_id"))
     }
 
-    return await contactsRepository.createContact(data);
+    await contactsRepository.createContact(data);
 }
 
 export async function fetchContacts() {
