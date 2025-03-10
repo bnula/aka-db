@@ -1,7 +1,7 @@
 'use client';
 
 import Navbar from "./ui/navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { createContact, fetchContacts, fetchInstitutions, fetchPositions } from "@/lib/actions";
 import { Contact } from "@/lib/types/contact";
 import { Position } from "@/lib/types/position";
@@ -11,6 +11,7 @@ export default function Home() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [positions, setPositions] = useState<Position[]>([]);
   const [institutions, setInstitutions] = useState<Institution[]>([]);
+  const [isPending, startTransition] = useTransition(); // Helps manage async state updates
 
   useEffect(() => {
     async function fetchData() {
@@ -26,6 +27,16 @@ export default function Home() {
     fetchData();
   }, []);
 
+  // Handles form submissions and refreshes data
+  const handleSubmit = async (action: (formData: FormData) => Promise<void>, formData: FormData) => {
+      await action(formData); // Call the server action
+      startTransition(async () => {
+      const contactsData = await fetchContacts();
+      
+      setContacts(contactsData);
+      });
+  };
+
   const getPositionName = (id: number) => {
     const position = positions.find((p) => p.id === id);
     return position ? position.name : "Unknown";
@@ -39,7 +50,7 @@ export default function Home() {
   return (
     <div className="p-6">
       <Navbar />
-      <form action={createContact} className="space-y-4">
+      <form action={(formData) => handleSubmit(createContact, formData)} className="space-y-4">
         <input placeholder="Titul" name="title" id="title" className="border p-2" />
         <input placeholder="Jmeno" name="name" id="name" className="border p-2" />
         <input placeholder="Email" name="email" id="email" className="border p-2" />
@@ -55,7 +66,9 @@ export default function Home() {
             <option key={i.id} value={i.id} className="text-black">{i.name}</option>
           ))}
         </select>
-        <button type="submit" className="bg-blue-500 text-white p-2">Pridat Kontakt</button>
+        <button type="submit" className="bg-blue-500 text-white p-2" disabled={isPending}>
+            {isPending ? "Přidávání..." : "Přidat kontakt"}
+            </button>
       </form>
       <table className="w-full mt-6 border">
         <thead>

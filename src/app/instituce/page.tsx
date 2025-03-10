@@ -3,12 +3,13 @@
 import { InstitutionType } from "@/lib/types/institution_type";
 import { Institution } from "@/lib/types/institution";
 import Navbar from "../ui/navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { fetchInstitutions, fetchInstitutionTypes, createInstitution } from "@/lib/actions";
 
 export default function Home() {
     const [institutions, setInstitutions] = useState<Institution[]>([]);
     const [types, setTypes] = useState<InstitutionType[]>([]);
+    const [isPending, startTransition] = useTransition(); // Helps manage async state updates
 
     useEffect(() => {
         async function fetchData() {
@@ -23,6 +24,16 @@ export default function Home() {
     const getTypeName = (id: number) => {
         const type = types.find((t) => t.id === id);
         return type ? type.name : "Unknown";
+    };
+
+    // Handles form submissions and refreshes data
+    const handleSubmit = async (action: (formData: FormData) => Promise<void>, formData: FormData) => {
+        await action(formData); // Call the server action
+        startTransition(async () => {
+        const institutionsData = await fetchInstitutions();
+        
+        setInstitutions(institutionsData);
+        });
     };
 
     return (
@@ -40,7 +51,9 @@ export default function Home() {
                         <option key={t.id} value={t.id} className="text-black">{t.name}</option>
                     ))}
                 </select>
-                <button type="submit" className="bg-blue-500 text-white p-2">Pridat Instituci</button>
+                <button type="submit" className="bg-blue-500 text-white p-2" disabled={isPending}>
+                    {isPending ? "Přidávání..." : "Přidat kontakt"}
+                </button>
             </form>
             <table className="w-full mt-6 border">
                 <thead>
