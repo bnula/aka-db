@@ -39,7 +39,7 @@ export default function Home() {
     return (
         <div className="p-6">
             <Navbar />
-            <form action={createInstitution} className="space-y-4">
+            <form action={(formData) => handleSubmit(createInstitution, formData)} className="space-y-4">
                 <input placeholder="Jmeno" name="name" id="name" className="border p-2" />
                 <input placeholder="Ulice" name="street" id="street" className="border p-2" />
                 <input placeholder="Mesto" name="city" id="city" className="border p-2" />
