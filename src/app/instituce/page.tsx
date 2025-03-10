@@ -4,12 +4,14 @@ import { InstitutionType } from "@/lib/types/institution_type";
 import { Institution } from "@/lib/types/institution";
 import Navbar from "../ui/navbar";
 import { useEffect, useState, useTransition } from "react";
-import { fetchInstitutions, fetchInstitutionTypes, createInstitution } from "@/lib/actions";
+import { fetchInstitutions, fetchInstitutionTypes, createInstitution, updateInstitution } from "@/lib/actions";
 
 export default function Home() {
     const [institutions, setInstitutions] = useState<Institution[]>([]);
     const [types, setTypes] = useState<InstitutionType[]>([]);
-    const [isPending, startTransition] = useTransition(); // Helps manage async state updates
+    const [editingId, setEditingId] = useState<number | null>(null);
+    const [editValues, setEditValues] = useState<Partial<Institution>>({});
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         async function fetchData() {
@@ -21,19 +23,47 @@ export default function Home() {
         fetchData();
     }, []);
 
-    const getTypeName = (id: number) => {
-        const type = types.find((t) => t.id === id);
-        return type ? type.name : "Unknown";
-    };
+    const getTypeName = (id: number) => types.find((t) => t.id === id)?.name || "Unknown";
 
     // Handles form submissions and refreshes data
     const handleSubmit = async (action: (formData: FormData) => Promise<void>, formData: FormData) => {
-        await action(formData); // Call the server action
+        await action(formData);
+        refreshData();
+    };
+
+    // Refresh function to update data after actions
+    const refreshData = () => {
         startTransition(async () => {
-        const institutionsData = await fetchInstitutions();
-        
-        setInstitutions(institutionsData);
+            const institutionsData = await fetchInstitutions();
+            setInstitutions(institutionsData);
+            setEditingId(null);
+            setEditValues({});
         });
+    };
+
+    // Handle edit button click
+    const handleEdit = (institution: Institution) => {
+        setEditingId(institution.id);
+        setEditValues(institution);
+    };
+
+    // Handle input change for editing
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setEditValues((prev) => ({ ...prev, [name]: value }));
+    };
+
+    // Handle save for edits
+    const handleSave = async () => {
+        if (!editingId) return;
+
+        const formData = new FormData();
+        Object.entries(editValues).forEach(([key, value]) => {
+            if (value !== undefined) formData.append(key, String(value));
+        });
+
+        await updateInstitution(formData);
+        refreshData();
     };
 
     return (
@@ -55,6 +85,7 @@ export default function Home() {
                     {isPending ? "Přidávání..." : "Přidat kontakt"}
                 </button>
             </form>
+
             <table className="w-full mt-6 border">
                 <thead>
                     <tr>
@@ -65,18 +96,76 @@ export default function Home() {
                         <th className="border p-2">Facebook</th>
                         <th className="border p-2">Instagram</th>
                         <th className="border p-2">Typ</th>
+                        <th className="border p-2">Akce</th>
                     </tr>
                 </thead>
                 <tbody>
                     {institutions.map((i) => (
                         <tr key={i.id}>
-                            <td className="border p-2">{i.name}</td>
-                            <td className="border p-2">{i.street}</td>
-                            <td className="border p-2">{i.city}</td>
-                            <td className="border p-2">{i.website}</td>
-                            <td className="border p-2">{i.facebook}</td>
-                            <td className="border p-2">{i.instagram}</td>
-                            <td className="border p-2">{getTypeName(i.type_id)}</td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="name" value={editValues.name || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.name
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="street" value={editValues.street || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.street
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="city" value={editValues.city || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.city
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="website" value={editValues.website || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.website
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="facebook" value={editValues.facebook || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.facebook
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="instagram" value={editValues.instagram || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.instagram
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <select name="type_id" value={editValues.type_id || ""} onChange={handleChange} className="border p-1">
+                                        {types.map((t) => (
+                                            <option key={t.id} value={t.id} className="text-black">{t.name}</option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    getTypeName(i.type_id)
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <button className="bg-green-500 text-white p-1" onClick={handleSave} disabled={isPending}>
+                                        Uložit
+                                    </button>
+                                ) : (
+                                    <button className="bg-yellow-500 text-white p-1" onClick={() => handleEdit(i)}>
+                                        Upravit
+                                    </button>
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

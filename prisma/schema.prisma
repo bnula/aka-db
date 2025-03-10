@@ -16,21 +16,23 @@ model contacts {
   title          String?      @db.VarChar
   cellphone      String?      @db.VarChar
   institution_id Int
-  institutions   institutions @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_institutions_fk")
-  positions      positions    @relation(fields: [position_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_positions_fk")
+  notes          String       @db.VarChar @default("")
+  institutions   institutions @relation(fields: [institution_id], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "contacts_institutions_fk")
+  positions      positions    @relation(fields: [position_id], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "contacts_positions_fk")
 }
 
 model institutions {
-  id        Int        @id(map: "institutions_pk") @default(autoincrement())
-  name      String     @db.VarChar
-  city      String     @db.VarChar
-  street    String     @db.VarChar
-  website   String?    @db.VarChar
-  facebook  String?    @db.VarChar
-  instagram String?    @db.VarChar
-  type_id   Int
-  contacts  contacts[]
-  institution_types   institution_types @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "contacts_institutions_fk")
+  id                  Int        @id(map: "institutions_pk") @default(autoincrement())
+  name                String     @db.VarChar
+  city                String     @db.VarChar
+  street              String     @db.VarChar
+  website             String?    @db.VarChar
+  facebook            String?    @db.VarChar
+  instagram           String?    @db.VarChar
+  type_id             Int
+  notes               String     @db.VarChar @default("")
+  contacts            contacts[]
+  institution_types   institution_types @relation(fields: [type_id], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "institutions_institution_types_fk")
 }
 
 model positions {
@@ -40,7 +42,7 @@ model positions {
 }
 
 model institution_types {
-  id      Int         @id(map: "institution_types_pk") @default(autoincrement())
-  name    String      @db.VarChar
+  id           Int         @id(map: "institution_types_pk") @default(autoincrement())
+  name         String      @db.VarChar
   institutions institutions[]
 }
