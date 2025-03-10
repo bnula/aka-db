@@ -108,6 +108,7 @@ export default function Home() {
             <th className="border p-2">Mobil</th>
             <th className="border p-2">Pozice</th>
             <th className="border p-2">Instituce</th>
+            <th className="border p-2">Poznamky</th>
             <th className="border p-2">Akce</th>
           </tr>
         </thead>
@@ -169,6 +170,13 @@ export default function Home() {
                   </select>
                 ) : (
                   getInstitutionName(contact.institution_id)
+                )}
+              </td>
+              <td className="border p-2">
+                {editingId === contact.id ? (
+                  <input name="notes" value={editValues.notes || ""} onChange={handleChange} className="border p-1" />
+                ) : (
+                  contact.notes
                 )}
               </td>
               <td className="border p-2">

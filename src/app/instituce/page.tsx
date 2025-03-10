@@ -96,6 +96,7 @@ export default function Home() {
                         <th className="border p-2">Facebook</th>
                         <th className="border p-2">Instagram</th>
                         <th className="border p-2">Typ</th>
+                        <th className="border p-2">Poznamky</th>
                         <th className="border p-2">Akce</th>
                     </tr>
                 </thead>
@@ -153,6 +154,13 @@ export default function Home() {
                                     </select>
                                 ) : (
                                     getTypeName(i.type_id)
+                                )}
+                            </td>
+                            <td className="border p-2">
+                                {editingId === i.id ? (
+                                    <input name="notes" value={editValues.notes || ""} onChange={handleChange} className="border p-1" />
+                                ) : (
+                                    i.notes
                                 )}
                             </td>
                             <td className="border p-2">

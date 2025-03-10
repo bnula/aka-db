@@ -10,4 +10,5 @@ export type Contact = {
     cellphone: string | null;
     position_id: number;
     institution_id: number;
+    notes: string;
 }

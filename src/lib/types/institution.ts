@@ -7,4 +7,5 @@ export type Institution = {
     facebook?: string| null;
     instagram?: string | null;
     type_id: number;
+    notes: string;
 }

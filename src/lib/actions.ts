@@ -46,7 +46,8 @@ export async function createInstitution(formData: FormData) {
         website: String(formData.get("website")),
         facebook: String(formData.get("facebook")),
         instagram: String(formData.get("instagram")),
-        type_id: Number(formData.get("type"))
+        type_id: Number(formData.get("type")),
+        notes: String(formData.get("notes"))
     };
 
     await contactsRepository.createInstitution(data);
@@ -60,7 +61,8 @@ export async function updateInstitution(formData: FormData) {
         website: String(formData.get("website")),
         facebook: String(formData.get("facebook")),
         instagram: String(formData.get("instagram")),
-        type_id: Number(formData.get("type_id"))
+        type_id: Number(formData.get("type_id")),
+        notes: String(formData.get("notes"))
     };
     const id = Number(formData.get("id"));
     
@@ -79,7 +81,8 @@ export async function createContact(formData: FormData) {
         phone: String(formData.get("phone")),
         cellphone: String(formData.get("cellphone")),
         position_id: Number(formData.get("position_id")),
-        institution_id: Number(formData.get("institution_id"))
+        institution_id: Number(formData.get("institution_id")),
+        notes: String(formData.get("notes"))
     }
 
     await contactsRepository.createContact(data);
@@ -93,7 +96,8 @@ export async function updateContact(formData: FormData){
         phone: String(formData.get("phone")),
         cellphone: String(formData.get("cellphone")),
         position_id: Number(formData.get("position_id")),
-        institution_id: Number(formData.get("institution_id"))
+        institution_id: Number(formData.get("institution_id")),
+        notes: String(formData.get("notes"))
     }
     const id = Number(formData.get("id"))
     contactsRepository.updateContact(id, data);

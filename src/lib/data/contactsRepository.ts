@@ -9,11 +9,11 @@ export const contactsRepository = {
         return await prisma.contacts.findUnique({ where: { id } });
     },
 
-    async createContact(data: { title: string, name: string, email: string, phone: string, cellphone: string, position_id: number, institution_id: number }) {
+    async createContact(data: { title: string, name: string, email: string, phone: string, cellphone: string, position_id: number, institution_id: number, notes: string }) {
         return await prisma.contacts.create({ data: data });
     },
 
-    async updateContact(id: number, data: { title: string, name: string, email: string, phone: string, cellphone: string, position_id: number, institution_id: number }) {
+    async updateContact(id: number, data: { title: string, name: string, email: string, phone: string, cellphone: string, position_id: number, institution_id: number, notes: string }) {
         return await prisma.contacts.update({ where: { id }, data: data });
     },
 
@@ -22,18 +22,19 @@ export const contactsRepository = {
     },
 
     async getAllInstitutions() {
-        return await prisma.institutions.findMany();
+        const inst = await prisma.institutions.findMany();
+        return inst;
     },
 
     async getInstitutionById(id: number){
         return await prisma.institutions.findUnique({ where: { id } });
     },
 
-    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string, type_id: number }) {
+    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string, type_id: number, notes: string }) {
         return await prisma.institutions.create({ data: data });
     },
 
-    async updateInstitution(id: number, data: { name: string, city: string, street: string, website: string, facebook: string, instagram: string, type_id: number }) {
+    async updateInstitution(id: number, data: { name: string, city: string, street: string, website: string, facebook: string, instagram: string, type_id: number, notes: string }) {
         return await prisma.institutions.update({ where: { id }, data: data });
         },
 
