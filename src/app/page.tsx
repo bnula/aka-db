@@ -1,18 +1,40 @@
-import Navbar from "./ui/navbar";
-import { createContact, fetchContacts, fetchInstitutions, fetchPositions } from "@/lib/actions";
+'use client';
 
-export default async function Home() {
-  const contacts = await fetchContacts();
-  const positions = await fetchPositions();
-  const institutions = await fetchInstitutions();
+import Navbar from "./ui/navbar";
+import { useEffect, useState } from "react";
+import { createContact, fetchContacts, fetchInstitutions, fetchPositions } from "@/lib/actions";
+import { Contact } from "@/lib/types/contact";
+import { Position } from "@/lib/types/position";
+import { Institution } from "@/lib/types/institution";
+
+export default function Home() {
+  const [contacts, setContacts] = useState<Contact[]>([]);
+  const [positions, setPositions] = useState<Position[]>([]);
+  const [institutions, setInstitutions] = useState<Institution[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const contactsData = await fetchContacts();
+      const positionsData = await fetchPositions();
+      const institutionsData = await fetchInstitutions();
+
+      setContacts(contactsData);
+      setPositions(positionsData);
+      setInstitutions(institutionsData);
+    }
+
+    fetchData();
+  }, []);
 
   const getPositionName = (id: number) => {
-    return positions.filter((p) => p.id === id)[0].name;
-  }
+    const position = positions.find((p) => p.id === id);
+    return position ? position.name : "Unknown";
+  };
 
   const getInstitutionName = (id: number) => {
-    return institutions.filter((i) => i.id === id)[0].name;
-  }
+    const institution = institutions.find((i) => i.id === id);
+    return institution ? institution.name : "Unknown";
+  };
 
   return (
     <div className="p-6">
@@ -24,18 +46,14 @@ export default async function Home() {
         <input placeholder="Telefon" name="phone" id="phone" className="border p-2" />
         <input placeholder="Mobil" name="cellPhone" id="cellPhone" className="border p-2" />
         <select name="position_id" id="position_id" className="border p-2">
-          {positions.map((p) => {
-            return (
-              <option key={p.id} value={p.id} className="text-black">{p.name}</option>
-            )
-          })}
+          {positions.map((p) => (
+            <option key={p.id} value={p.id} className="text-black">{p.name}</option>
+          ))}
         </select>
         <select name="institution_id" id="institution_id" className="border p-2">
-            {institutions.map((i) => {
-              return (
-                <option key={i.id} value={i.id} className="text-black">{i.name}</option>
-              )
-            })}
+          {institutions.map((i) => (
+            <option key={i.id} value={i.id} className="text-black">{i.name}</option>
+          ))}
         </select>
         <button type="submit" className="bg-blue-500 text-white p-2">Pridat Kontakt</button>
       </form>
@@ -66,5 +84,5 @@ export default async function Home() {
         </tbody>
       </table>
     </div>
-  )
+  );
 }

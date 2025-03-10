@@ -7,7 +7,7 @@ export type Contact = {
     email: string;
     title: string | null;
     phone: string;
-    cellPhone: string | null;
+    cellphone: string | null;
     position_id: number;
     institution_id: number;
 }
