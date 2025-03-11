@@ -3,12 +3,12 @@
 import { useEffect, useState, useTransition } from "react";
 import Navbar from "../ui/navbar";
 import { 
-  createInstitutionType, 
-  createPosition, 
-  updateInstitutionType, 
-  updatePosition, 
-  fetchInstitutionTypes, 
-  fetchPositions 
+    createInstitutionType, 
+    createPosition, 
+    updateInstitutionType, 
+    updatePosition, 
+    fetchInstitutionTypes, 
+    fetchPositions
 } from "@/lib/actions";
 import { InstitutionType } from "@/lib/types/institution_type";
 import { Position } from "@/lib/types/position";
@@ -60,7 +60,11 @@ export default function Home() {
         formData.append("id", String(editing.id));
         formData.append("name", editValue);
 
-        editing.type === "position" ? await updatePosition(formData) : await updateInstitutionType(formData);
+        if (editing.type === "position") {
+        await updatePosition(formData);
+        } else {
+        await updateInstitutionType(formData);
+        }
         refreshData();
     };
 

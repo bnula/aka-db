@@ -5,7 +5,7 @@ export default function Navbar() {
         <nav className="bg-gray-800 text-white p-4 flex space-x-4">
             <Link href="/" className="hover:underline">Kontakty</Link>
             <Link href="/instituce" className="hover:underline">Instituce</Link>
-            <Link href="/pozice" className="hover:underline">Pozice</Link>
+            <Link href="/pozice" className="hover:underline">Pozice a Typy</Link>
         </nav>
     )
 }
