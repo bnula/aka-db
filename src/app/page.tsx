@@ -101,7 +101,7 @@ export default function Home() {
 
         <table className="w-full border-collapse border border-gray-700">
             <thead>
-            <tr>
+            <tr className="bg-gray-700">
                 <th className="border p-2">Titul</th>
                 <th className="border p-2">Jmeno</th>
                 <th className="border p-2">Email</th>

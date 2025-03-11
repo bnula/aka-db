@@ -84,14 +84,14 @@ export default function Home() {
                     <tbody>
                         {positions.map((p) => (
                             <tr key={p.id} className="border">
-                                <td className="border p-2 bg-gray-700">
+                                <td className="border p-2 bg-gray-800">
                                     {editing.id === p.id && editing.type === "position" ? (
                                         <input className="border p-2 w-full bg-gray-700" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
                                     ) : (
                                         p.name
                                     )}
                                 </td>
-                                <td className="border p-2 text-center bg-gray-700">
+                                <td className="border p-2 text-center bg-gray-800">
                                     {editing.id === p.id && editing.type === "position" ? (
                                         <button className="bg-green-500 text-white px-4 py-1 rounded" onClick={handleSave} disabled={isPending}>Uložit</button>
                                     ) : (
@@ -122,14 +122,14 @@ export default function Home() {
                     <tbody>
                         {institutionTypes.map((it) => (
                             <tr key={it.id} className="border">
-                                <td className="border p-2 bg-gray-700">
+                                <td className="border p-2 bg-gray-800">
                                     {editing.id === it.id && editing.type === "institution" ? (
-                                        <input className="border p-2 w-full bg-gray-700" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                                        <input className="border p-2 w-full bg-gray-800" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
                                     ) : (
                                         it.name
                                     )}
                                 </td>
-                                <td className="border p-2 text-center bg-gray-700">
+                                <td className="border p-2 text-center bg-gray-800">
                                     {editing.id === it.id && editing.type === "institution" ? (
                                         <button className="bg-green-500 text-white px-4 py-1 rounded" onClick={handleSave} disabled={isPending}>Uložit</button>
                                     ) : (

@@ -89,7 +89,7 @@ export default function Home() {
 
             <table className="w-full border-collapse border border-gray-700">
                 <thead>
-                    <tr className="bg-gray-800">
+                    <tr className="bg-gray-700">
                         <th className="border p-2">Jmeno</th>
                         <th className="border p-2">Ulice</th>
                         <th className="border p-2">Mesto</th>
