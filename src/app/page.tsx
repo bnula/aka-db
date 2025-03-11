@@ -77,7 +77,7 @@ export default function Home() {
     return (
         <div className="p-6 bg-gray-900 text-center">
         <Navbar />
-        <h1 className="text-2xl font-semibold mb-4">Kontakty</h1>
+        <h1 className="text-2xl font-semibold mb-4 text-white">Kontakty</h1>
         <form action={(formData) => handleSubmit(createContact, formData)} className="space-y-4 md:flex md:items-center md:space-y-0 md:space-x-4 bg-gray-800 p-4 rounded-lg">
             <input placeholder="Titul" name="title" id="title" className="border p-2 rounded bg-gray-700 text-white" />
             <input placeholder="Jmeno" name="name" id="name" className="border p-2 rounded bg-gray-700 text-white" />
@@ -86,12 +86,12 @@ export default function Home() {
             <input placeholder="Mobil" name="cellphone" id="cellphone" className="border p-2 rounded bg-gray-700 text-white" />
             <select name="position_id" id="position_id" className="border p-2 rounded bg-gray-700 text-white">
             {positions.map((p) => (
-                <option key={p.id} value={p.id} className="text-black">{p.name}</option>
+                <option key={p.id} value={p.id} className="text-white">{p.name}</option>
             ))}
             </select>
             <select name="institution_id" id="institution_id" className="border p-2 rounded bg-gray-700 text-white">
             {institutions.map((i) => (
-                <option key={i.id} value={i.id} className="text-black">{i.name}</option>
+                <option key={i.id} value={i.id} className="text-white">{i.name}</option>
             ))}
             </select>
             <button type="submit" className="bg-blue-500 text-white p-2 rounded" disabled={isPending}>
@@ -102,56 +102,56 @@ export default function Home() {
         <table className="w-full border-collapse border border-gray-700">
             <thead>
             <tr className="bg-gray-700">
-                <th className="border p-2">Titul</th>
-                <th className="border p-2">Jmeno</th>
-                <th className="border p-2">Email</th>
-                <th className="border p-2">Pevna linka</th>
-                <th className="border p-2">Mobil</th>
-                <th className="border p-2">Pozice</th>
-                <th className="border p-2">Instituce</th>
-                <th className="border p-2">Poznamky</th>
-                <th className="border p-2">Akce</th>
+                <th className="border p-2 text-white">Titul</th>
+                <th className="border p-2 text-white">Jmeno</th>
+                <th className="border p-2 text-white">Email</th>
+                <th className="border p-2 text-white">Pevna linka</th>
+                <th className="border p-2 text-white">Mobil</th>
+                <th className="border p-2 text-white">Pozice</th>
+                <th className="border p-2 text-white">Instituce</th>
+                <th className="border p-2 text-white">Poznamky</th>
+                <th className="border p-2 text-white">Akce</th>
             </tr>
             </thead>
             <tbody>
             {contacts.map((contact) => (
                 <tr key={contact.id} className="border-gray-700">
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <input name="title" value={editValues.title || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white" />
                     ) : (
                     contact.title
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <input name="name" value={editValues.name || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white" />
                     ) : (
                     contact.name
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <input name="email" value={editValues.email || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white" />
                     ) : (
                     contact.email
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <input name="phone" value={editValues.phone || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white" />
                     ) : (
                     contact.phone
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <input name="cellphone" value={editValues.cellphone || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white" />
                     ) : (
                     contact.cellphone
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <select name="position_id" value={editValues.position_id || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white">
                         {positions.map((p) => (
@@ -162,7 +162,7 @@ export default function Home() {
                     getPositionName(contact.position_id)
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <select name="institution_id" value={editValues.institution_id || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white">
                         {institutions.map((i) => (
@@ -173,7 +173,7 @@ export default function Home() {
                     getInstitutionName(contact.institution_id)
                     )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-white">
                     {editingId === contact.id ? (
                     <input name="notes" value={editValues.notes || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white" />
                     ) : (

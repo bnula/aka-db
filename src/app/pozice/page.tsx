@@ -85,21 +85,21 @@ export default function Home() {
                 <table className="w-full border-collapse border border-gray-700">
                     <thead>
                         <tr className="bg-gray-800">
-                            <th className="border p-2 bg-gray-700">Pozice</th>
-                            <th className="border p-2 bg-gray-700">Akce</th>
+                            <th className="border p-2 bg-gray-700 text-white">Pozice</th>
+                            <th className="border p-2 bg-gray-700 text-white">Akce</th>
                         </tr>
                     </thead>
                     <tbody>
                         {positions.map((p) => (
                             <tr key={p.id} className="border">
-                                <td className="border p-2 bg-gray-800">
+                                <td className="border p-2 bg-gray-800 text-white">
                                     {editing.id === p.id && editing.type === "position" ? (
-                                        <input className="border p-2 w-full bg-gray-700" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                                        <input className="border p-2 w-full bg-gray-700 text-white" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
                                     ) : (
                                         p.name
                                     )}
                                 </td>
-                                <td className="border p-2 text-center bg-gray-800">
+                                <td className="border p-2 text-center bg-gray-800 text-white">
                                     {editing.id === p.id && editing.type === "position" ? (
                                         <button className="bg-green-500 text-white px-4 py-1 rounded" onClick={handleSave} disabled={isPending}>Uložit</button>
                                     ) : (
@@ -123,8 +123,8 @@ export default function Home() {
                 <table className="w-full border-collapse border border-gray-300">
                     <thead>
                         <tr className="bg-gray-700">
-                            <th className="border p-2 bg-gray-700">Typ</th>
-                            <th className="border p-2 bg-gray-700">Akce</th>
+                            <th className="border p-2 bg-gray-700 text-white">Typ</th>
+                            <th className="border p-2 bg-gray-700 text-white">Akce</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -132,7 +132,7 @@ export default function Home() {
                             <tr key={it.id} className="border">
                                 <td className="border p-2 bg-gray-800">
                                     {editing.id === it.id && editing.type === "institution" ? (
-                                        <input className="border p-2 w-full bg-gray-800" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                                        <input className="border p-2 w-full bg-gray-800 text-white" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
                                     ) : (
                                         it.name
                                     )}
