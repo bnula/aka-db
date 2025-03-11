@@ -25,34 +25,41 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchData() {
-            const positionsData = await fetchPositions();
-            const institutionTypesData = await fetchInstitutionTypes();
+        const positionsData = await fetchPositions();
+        const institutionTypesData = await fetchInstitutionTypes();
 
-            setPositions(positionsData);
-            setInstitutionTypes(institutionTypesData);
+        setPositions(positionsData);
+        setInstitutionTypes(institutionTypesData);
         }
 
         fetchData();
     }, []);
 
+    // Handles form submissions and refreshes data
     const handleSubmit = async (action: (formData: FormData) => Promise<void>, formData: FormData) => {
         await action(formData);
         refreshData();
     };
 
+    // Refresh function to update data after actions
     const refreshData = () => {
         startTransition(async () => {
-            setPositions(await fetchPositions());
-            setInstitutionTypes(await fetchInstitutionTypes());
-            setEditing({ id: null, type: null });
+        const positionsData = await fetchPositions();
+        const institutionTypesData = await fetchInstitutionTypes();
+
+        setPositions(positionsData);
+        setInstitutionTypes(institutionTypesData);
+        setEditing({ id: null, type: null });
         });
     };
 
+    // Handles edit button click
     const handleEdit = (id: number, type: "position" | "institution", currentValue: string) => {
         setEditing({ id, type });
         setEditValue(currentValue);
     };
 
+    // Handles save for edits
     const handleSave = async () => {
         if (!editing.id || !editing.type) return;
         
@@ -65,6 +72,7 @@ export default function Home() {
         } else {
         await updateInstitutionType(formData);
         }
+
         refreshData();
     };
 
