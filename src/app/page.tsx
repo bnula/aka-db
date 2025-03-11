@@ -155,7 +155,7 @@ export default function Home() {
                     {editingId === contact.id ? (
                     <select name="position_id" value={editValues.position_id || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white">
                         {positions.map((p) => (
-                        <option key={p.id} value={p.id} className="text-black">{p.name}</option>
+                        <option key={p.id} value={p.id} className="text-white">{p.name}</option>
                         ))}
                     </select>
                     ) : (
@@ -166,7 +166,7 @@ export default function Home() {
                     {editingId === contact.id ? (
                     <select name="institution_id" value={editValues.institution_id || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white">
                         {institutions.map((i) => (
-                        <option key={i.id} value={i.id} className="text-black">{i.name}</option>
+                        <option key={i.id} value={i.id} className="text-white">{i.name}</option>
                         ))}
                     </select>
                     ) : (

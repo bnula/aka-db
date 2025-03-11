@@ -150,7 +150,7 @@ export default function Home() {
                                 {editingId === i.id ? (
                                     <select name="type_id" value={editValues.type_id || ""} onChange={handleChange} className="border p-1 bg-gray-800 text-white">
                                         {types.map((t) => (
-                                            <option key={t.id} value={t.id} className="text-black">{t.name}</option>
+                                            <option key={t.id} value={t.id} className="text-white">{t.name}</option>
                                         ))}
                                     </select>
                                 ) : (
