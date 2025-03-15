@@ -2,6 +2,10 @@
 
 import { contactsRepository } from "./data/contactsRepository";
 
+export async function fetchCounties() {
+    return await contactsRepository.getAllCounties();
+}
+
 export async function createPosition(formData: FormData){
     const name = String(formData.get("name"))
     
@@ -13,13 +17,13 @@ export async function createPosition(formData: FormData){
 export async function updatePosition(formData: FormData) {
     const id = Number(formData.get("id"));
     const name = String(formData.get("name"));
-    contactsRepository.updatePosition(id, {name})
+    await contactsRepository.updatePosition(id, {name})
 }
 
 export async function updateInstitutionType(formData: FormData) {
     const id = Number(formData.get("id"));
     const name = String(formData.get("name"));
-    contactsRepository.updateInstitutionType(id, {name});
+    await contactsRepository.updateInstitutionType(id, {name});
 }
 
 export async function fetchPositions() {
@@ -46,8 +50,9 @@ export async function createInstitution(formData: FormData) {
         website: String(formData.get("website")),
         facebook: String(formData.get("facebook")),
         instagram: String(formData.get("instagram")),
-        type_id: Number(formData.get("type")),
-        notes: String(formData.get("notes"))
+        type_id: Number(formData.get("type_id")),
+        notes: String(formData.get("notes")),
+        county_id: Number(formData.get("county_id"))
     };
 
     await contactsRepository.createInstitution(data);
@@ -62,7 +67,8 @@ export async function updateInstitution(formData: FormData) {
         facebook: String(formData.get("facebook")),
         instagram: String(formData.get("instagram")),
         type_id: Number(formData.get("type_id")),
-        notes: String(formData.get("notes"))
+        notes: String(formData.get("notes")),
+        county_id: Number(formData.get("county_id"))
     };
     const id = Number(formData.get("id"));
     
@@ -100,7 +106,7 @@ export async function updateContact(formData: FormData){
         notes: String(formData.get("notes"))
     }
     const id = Number(formData.get("id"))
-    contactsRepository.updateContact(id, data);
+    await contactsRepository.updateContact(id, data);
 }
 
 export async function fetchContacts() {

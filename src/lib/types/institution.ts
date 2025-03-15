@@ -3,6 +3,7 @@ export type Institution = {
     name: string;
     street: string;
     city: string;
+    county_id: number;
     website?: string | null;
     facebook?: string| null;
     instagram?: string | null;

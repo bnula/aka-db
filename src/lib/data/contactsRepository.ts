@@ -1,6 +1,10 @@
 import { prisma } from "../prisma";
 
 export const contactsRepository = {
+    async getAllCounties() {
+        return await prisma.counties.findMany();
+    },
+
     async getAllContacts() {
         return await prisma.contacts.findMany();
     },
@@ -30,11 +34,11 @@ export const contactsRepository = {
         return await prisma.institutions.findUnique({ where: { id } });
     },
 
-    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string, type_id: number, notes: string }) {
+    async createInstitution(data: { name: string, street: string, city: string, website: string, facebook: string, instagram: string, type_id: number, notes: string, county_id: number }) {
         return await prisma.institutions.create({ data: data });
     },
 
-    async updateInstitution(id: number, data: { name: string, city: string, street: string, website: string, facebook: string, instagram: string, type_id: number, notes: string }) {
+    async updateInstitution(id: number, data: { name: string, city: string, street: string, website: string, facebook: string, instagram: string, type_id: number, notes: string, county_id: number }) {
         return await prisma.institutions.update({ where: { id }, data: data });
         },
 

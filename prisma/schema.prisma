@@ -30,15 +30,23 @@ model institutions {
   facebook            String?    @db.VarChar
   instagram           String?    @db.VarChar
   type_id             Int
+  county_id           Int        @default(1)
   notes               String     @db.VarChar @default("")
   contacts            contacts[]
   institution_types   institution_types @relation(fields: [type_id], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "institutions_institution_types_fk")
+  counties            counties @relation(fields: [county_id], references: [id], onDelete: Restrict, onUpdate: Cascade, map: "institutions_counties_fk")
 }
 
 model positions {
   id       Int        @id(map: "positions_pk") @default(autoincrement())
   name     String     @db.VarChar
   contacts contacts[]
+}
+
+model counties {
+  id            Int       @id(map: "county_pk") @default(autoincrement())
+  name          String    @default("")
+  institutions  institutions[]
 }
 
 model institution_types {
