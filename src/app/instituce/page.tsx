@@ -142,7 +142,7 @@ export default function Home() {
                 <input placeholder="Jmeno" name="name" id="name" className="border p-2 rounded bg-gray-700 text-white" />
                 <input placeholder="Ulice" name="street" id="street" className="border p-2 rounded bg-gray-700 text-white" />
                 <input placeholder="Mesto" name="city" id="city" className="border p-2 rounded bg-gray-700 text-white" />
-                <select className="border p-2 rounded bg-gray-700 text-white" name="type" id="type">
+                <select className="border p-2 rounded bg-gray-700 text-white" name="type_id" id="type_id">
                     {types.map((t) => (
                         <option key={t.id} value={t.id} className="text-white">{t.name}</option>
                     ))}
@@ -150,7 +150,7 @@ export default function Home() {
                 <input placeholder="Web" name="website" id="website" className="border p-2 rounded bg-gray-700 text-white" />
                 <input placeholder="Facebook" name="facebook" id="facebook" className="border p-2 rounded bg-gray-700 text-white" />
                 <input placeholder="Instagram" name="instagram" id="instagram" className="border p-2 rounded bg-gray-700 text-white" />
-                <select className="border p-2 rounded bg-gray-700 text-white" name="county" id="county">
+                <select className="border p-2 rounded bg-gray-700 text-white" name="county_id" id="county_id">
                     {counties.map((c) => (
                         <option key={c.id} value={c.id} className="text-white">{c.name}</option>
                     ))}
